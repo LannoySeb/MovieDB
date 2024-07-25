@@ -4,8 +4,10 @@ import android.view.LayoutInflater
 import android.view.TextureView
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.moviedb.Model.Movie
 import com.example.moviedb.R
 import java.time.format.DateTimeFormatter
@@ -14,10 +16,14 @@ class MovieAdapter(private val dataSet: Array<Movie>) : RecyclerView.Adapter<Mov
     class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleTextView : TextView
         val dateTextView : TextView
+        val poster : ImageView
+        val allView : View
 
         init {
             titleTextView = view.findViewById(R.id.movie_title)
             dateTextView = view.findViewById(R.id.release_date)
+            poster = view.findViewById(R.id.imageView)
+            allView = view
         }
     }
 
@@ -33,6 +39,9 @@ class MovieAdapter(private val dataSet: Array<Movie>) : RecyclerView.Adapter<Mov
         // contents of the view with that element
         viewHolder.titleTextView.text = dataSet[position].originalTitle
         viewHolder.dateTextView.text = dataSet[position].releaseDate.format(DateTimeFormatter.ofPattern("MM-dd-yyyy")).toString()
+        Glide.with(viewHolder.allView)
+            .load(dataSet[position].posterUri)
+            .into(viewHolder.poster)
     }
 
     // Return the size of your dataset (invoked by the layout manager)
