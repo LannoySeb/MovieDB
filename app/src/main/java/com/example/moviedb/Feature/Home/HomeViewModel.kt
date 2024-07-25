@@ -19,8 +19,8 @@ class HomeViewModel : ViewModel(), KoinComponent {
     public fun search(query: String) {
 
         viewModelScope.launch {
-            homeService.searchMovie("spider")
-            moviesArray.value = createMovieListStubs()
+//            var a = homeService.CreateGuestSession()
+            moviesArray.value = homeService.searchMovie("spider")
         }
 
     }

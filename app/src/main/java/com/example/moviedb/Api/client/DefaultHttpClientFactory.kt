@@ -1,6 +1,7 @@
 package com.example.moviedb.Api.client
 
 import com.example.moviedb.Api.configuration.IApplicationConfiguration
+import com.example.moviedb.Api.interceptor.AuthInterceptor
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import org.koin.core.scope.Scope
@@ -21,9 +22,7 @@ open class DefaultHttpClientFactory (open val scope: Scope){
     internal fun getDefaultHttpClientBuilder(scope: Scope): OkHttpClient.Builder {
         val builder = OkHttpClient.Builder()
 
-
-        val interceptor = scope.getKoin().getAll<Interceptor>()
-        interceptor.forEach { builder.addInterceptor(it) }
+        builder.addInterceptor(AuthInterceptor())
 
         return builder
     }

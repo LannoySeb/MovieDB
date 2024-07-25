@@ -38,7 +38,11 @@ class MovieAdapter(private var dataSet: Array<Movie>) : RecyclerView.Adapter<Mov
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.titleTextView.text = dataSet[position].originalTitle
-        viewHolder.dateTextView.text = dataSet[position].releaseDate.format(DateTimeFormatter.ofPattern("MM-dd-yyyy")).toString()
+        var dateString = if(dataSet[position].releaseDate != null)
+            dataSet[position].releaseDate?.format(DateTimeFormatter.ofPattern("MMMM-dd-yyyy")).toString()
+        else
+            "No release date"
+        viewHolder.dateTextView.text = dateString
         Glide.with(viewHolder.allView)
             .load(dataSet[position].posterUri)
             .into(viewHolder.poster)
