@@ -1,27 +1,36 @@
 package com.example.moviedb.Feature.Home
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.moviedb.Api.MovieDbApi
 import com.example.moviedb.Api.interceptor.AuthInterceptor
 import com.example.moviedb.Model.Movie
+import kotlinx.coroutines.launch
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.http.Query
 import java.time.LocalDate
 import java.util.Date
 
 class HomeViewModel : ViewModel() {
 
     lateinit var service : MovieDbApi
+    var moviesArray :  MutableLiveData<Array<Movie>> = MutableLiveData<Array<Movie>>()
 
     init {
         service = getRetrofit(getDefaultHttpClient()).create(MovieDbApi::class.java)
     }
 
-    public suspend fun search(){
+    public fun search(query: String) {
+
+        viewModelScope.launch {
 //        var a = service.getSearchMovieAsync("spider");
-//        println(a.size)
+            moviesArray.value = createMovieListStubs()
+        }
+
     }
 
     fun createMovieListStubs(): Array<Movie> {

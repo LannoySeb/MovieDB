@@ -12,7 +12,7 @@ import com.example.moviedb.Model.Movie
 import com.example.moviedb.R
 import java.time.format.DateTimeFormatter
 
-class MovieAdapter(private val dataSet: Array<Movie>) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
+class MovieAdapter(private var dataSet: Array<Movie>) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleTextView : TextView
         val dateTextView : TextView
@@ -47,4 +47,8 @@ class MovieAdapter(private val dataSet: Array<Movie>) : RecyclerView.Adapter<Mov
     // Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount() = dataSet.size
 
+    public fun updateDataSet(movies : Array<Movie>){
+        dataSet = movies
+        notifyDataSetChanged()
+    }
 }
