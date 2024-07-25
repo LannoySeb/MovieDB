@@ -1,11 +1,11 @@
 package com.example.moviedb.Model
 
-import java.util.Date
+import java.time.LocalDate
 
 
 data class Movie(
     val originalTitle : String,
     val posterUri : String,
-    val releaseDate: Date
+    val releaseDate: LocalDate
 
 )

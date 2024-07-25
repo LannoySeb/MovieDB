@@ -8,6 +8,7 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.time.LocalDate
 import java.util.Date
 
 class HomeViewModel : ViewModel() {
@@ -28,27 +29,27 @@ class HomeViewModel : ViewModel() {
             Movie(
                 "The Shawshank Redemption",
                 "https://m.media-amazon.com/images/M/MV5BMDFkYTc0MGEtZmNhMC00ZDIzLWFmNTEtODM1ZmRlYWMwMWFmXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_SX300.jpg",
-                Date(7776000000) // September 23, 1994
+                LocalDate.of(1994, 9, 23)
             ),
             Movie(
                 "The Dark Knight",
                 "https://m.media-amazon.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg",
-                Date(1214803200000) // July 18, 2008
+                LocalDate.of(2008, 7, 18)
             ),
             Movie(
                 "Pulp Fiction",
                 "https://m.media-amazon.com/images/M/MV5BNGNhMDIzZTUtNTBlZi00MTRlLWFjM2ItYzViMjE3YzI5MjljXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
-                Date(769728000000) // October 14, 1994
+                LocalDate.of(1994, 10, 14)
             ),
             Movie(
                 "Inception",
                 "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg",
-                Date(1278422400000) // July 16, 2010
+                LocalDate.of(2010, 7, 16)
             ),
             Movie(
                 "The Matrix",
                 "https://m.media-amazon.com/images/M/MV5BNzQzOTk3OTAtNDQ0Zi00ZTVkLWI0MTEtMDllZjNkYzNjNTc4L2ltYWdlXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
-                Date(922848000000) // March 31, 1999
+                LocalDate.of(1999, 3, 31)
             )
         )
     }

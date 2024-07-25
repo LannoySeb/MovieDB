@@ -8,13 +8,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviedb.Model.Movie
 import com.example.moviedb.R
+import java.time.format.DateTimeFormatter
 
 class MovieAdapter(private val dataSet: Array<Movie>) : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
     class MovieViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleTextView : TextView
+        val dateTextView : TextView
 
         init {
             titleTextView = view.findViewById(R.id.movie_title)
+            dateTextView = view.findViewById(R.id.release_date)
         }
     }
 
@@ -29,6 +32,7 @@ class MovieAdapter(private val dataSet: Array<Movie>) : RecyclerView.Adapter<Mov
         // Get element from your dataset at this position and replace the
         // contents of the view with that element
         viewHolder.titleTextView.text = dataSet[position].originalTitle
+        viewHolder.dateTextView.text = dataSet[position].releaseDate.format(DateTimeFormatter.ofPattern("MM-dd-yyyy")).toString()
     }
 
     // Return the size of your dataset (invoked by the layout manager)
