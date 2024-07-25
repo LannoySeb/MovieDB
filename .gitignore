@@ -59,3 +59,4 @@ outTmp/
 kotlin-ide/
 .kotlin/
 .teamcity/
+app/src/main/res/values/secret.xml
