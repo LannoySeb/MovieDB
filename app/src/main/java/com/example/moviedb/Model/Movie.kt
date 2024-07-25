@@ -4,8 +4,8 @@ import java.time.LocalDate
 
 
 data class Movie(
-    val originalTitle : String,
-    val posterUri : String,
-    val releaseDate: LocalDate
+    val originalTitle : String?,
+    val posterUri : String?,
+    val releaseDate: LocalDate?
 
 )
