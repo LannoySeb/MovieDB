@@ -17,8 +17,8 @@ class HomeViewModel : ViewModel() {
     }
 
     public suspend fun search(){
-        var a = service.getSearchMovieAsync("spider");
-        println(a.size)
+//        var a = service.getSearchMovieAsync("spider");
+//        println(a.size)
     }
     fun getDefaultHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
