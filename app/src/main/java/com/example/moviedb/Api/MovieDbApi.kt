@@ -7,9 +7,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface MovieDbApi {
-
-    @GET("authentication/guest_session/new")
-    suspend fun CreateGuestSession() : Response<String>
     @GET("search/movie")
     suspend fun getSearchMovieAsync(@Query("query") query: String) : Response<SearchMovieBindingModel>
 }

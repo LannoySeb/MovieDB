@@ -7,11 +7,6 @@ import java.time.format.DateTimeFormatter
 
 class HomeService(private val movieApi : MovieDbApi) {
 
-    suspend fun CreateGuestSession() : String?{
-        val response = movieApi.CreateGuestSession()
-        return response.body()
-    }
-
     suspend fun searchMovie(query : String) : Array<Movie>?{
         val response = movieApi.getSearchMovieAsync(query)
         if(response.isSuccessful) {
