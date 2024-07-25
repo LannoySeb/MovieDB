@@ -2,6 +2,8 @@ package com.example.moviedb.Feature.Home
 
 import androidx.lifecycle.ViewModel
 import com.example.moviedb.Api.MovieDbApi
+import com.example.moviedb.Api.interceptor.AuthInterceptor
+import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -19,8 +21,8 @@ class HomeViewModel : ViewModel() {
         println(a.size)
     }
     fun getDefaultHttpClient(): OkHttpClient {
-        // TODO Add interceptor
         return OkHttpClient.Builder()
+            .addInterceptor(AuthInterceptor())
             .build()
     }
     fun getRetrofit(client: OkHttpClient) : Retrofit{
