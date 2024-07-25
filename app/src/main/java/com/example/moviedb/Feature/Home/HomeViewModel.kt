@@ -3,31 +3,23 @@ package com.example.moviedb.Feature.Home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.moviedb.Api.MovieDbApi
-import com.example.moviedb.Api.interceptor.AuthInterceptor
+import com.example.moviedb.Api.Service.HomeService
 import com.example.moviedb.Model.Movie
 import kotlinx.coroutines.launch
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.http.Query
 import java.time.LocalDate
-import java.util.Date
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel : ViewModel(), KoinComponent {
 
-    lateinit var service : MovieDbApi
+    val homeService by inject<HomeService>()
+
     var moviesArray :  MutableLiveData<Array<Movie>> = MutableLiveData<Array<Movie>>()
-
-    init {
-        service = getRetrofit(getDefaultHttpClient()).create(MovieDbApi::class.java)
-    }
 
     public fun search(query: String) {
 
         viewModelScope.launch {
-//        var a = service.getSearchMovieAsync("spider");
+            homeService.searchMovie("spider")
             moviesArray.value = createMovieListStubs()
         }
 
@@ -63,16 +55,16 @@ class HomeViewModel : ViewModel() {
         )
     }
 
-    fun getDefaultHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(AuthInterceptor())
-            .build()
-    }
-    fun getRetrofit(client: OkHttpClient) : Retrofit{
-        return Retrofit.Builder()
-            .baseUrl("https://api.themoviedb.org/3/")
-            .client(client)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
+//    fun getDefaultHttpClient(): OkHttpClient {
+//        return OkHttpClient.Builder()
+//            .addInterceptor(AuthInterceptor())
+//            .build()
+//    }
+//    fun getRetrofit(client: OkHttpClient) : Retrofit{
+//        return Retrofit.Builder()
+//            .baseUrl("https://api.themoviedb.org/3/")
+//            .client(client)
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build()
+//    }
 }
