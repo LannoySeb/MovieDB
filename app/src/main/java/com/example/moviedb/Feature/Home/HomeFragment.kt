@@ -40,10 +40,6 @@ class HomeFragment : Fragment() {
         adapter = MovieAdapter(emptyArray())
         recyclerView.adapter = adapter
 
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            viewModel.search()
-//        }
-
         val movieArrayObserver = Observer<Array<Movie>>{
             adapter.updateDataSet(it)
         }
