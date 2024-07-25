@@ -5,7 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.moviedb.Model.Movie
 import com.example.moviedb.databinding.FragmentHomeBinding
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -22,15 +26,27 @@ class HomeFragment : Fragment() {
 
     private val viewModel by viewModel<HomeViewModel>()
 
+    private lateinit var recyclerView : RecyclerView
+    private lateinit var adapter : MovieAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.search()
+        recyclerView = binding.moviesRecyclerview
+
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+        adapter = MovieAdapter(emptyArray())
+        recyclerView.adapter = adapter
+
+        val movieArrayObserver = Observer<Array<Movie>>{
+            adapter.updateDataSet(it)
         }
+
+        viewModel.moviesArray.observe(viewLifecycleOwner, movieArrayObserver)
+
+        viewModel.search("a")
         return binding.root
     }
 }
